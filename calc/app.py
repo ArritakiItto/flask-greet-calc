@@ -27,3 +27,21 @@ def do_mult():
     b = int(request.args.get("b"))
     result = mult(a, b)
     return str(result)
+ @app.route('/div')
+def do_div():
+    """Divide a by b."""
+    a = int(request.args.get("a"))
+    b = int(request.args.get("b"))
+    result = div(a, b)
+    return str(result)
+
+operators = { "add": add, "sub": sub, "mult": mult, "div": div }
+
+@app.route('/math/<operator>')
+def do_math(operator):
+    """Do math on a and b."""
+    a = int(request.args.get("a"))
+    b = int(request.args.get("b"))
+    result = operators[operator](a, b)
+    return str(result)
+
